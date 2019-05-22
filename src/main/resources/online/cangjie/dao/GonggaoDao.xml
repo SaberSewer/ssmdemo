@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.cangjie.dao.GonggaoDao">
+	<resultMap id="BaseResultMap" type="TGonggao">
+		<result column="gonggao_id" jdbcType="INTEGER" property="gonggaoId" />
+		<result column="gonggao_title" jdbcType="VARCHAR" property="gonggaoTitle" />
+		<result column="gonggao_content" jdbcType="VARCHAR" property="gonggaoContent" />
+		<result column="gonggao_data" property="gonggaoData" />
+		<result column="gonggao_fabuzhe" jdbcType="VARCHAR" property="gonggaoFabuzhe" />
+		<result column="gonggao_del" jdbcType="VARCHAR" property="gonggaoDel" />
+		<result column="gonggao_one1" jdbcType="VARCHAR" property="gonggaoOne1" />
+		<result column="gonggao_one2" jdbcType="VARCHAR" property="gonggaoOne2" />
+		<result column="gonggao_one3" jdbcType="VARCHAR" property="gonggaoOne3" />
+		<result column="gonggao_one4" jdbcType="VARCHAR" property="gonggaoOne4" />
+		<result column="gonggao_one5" jdbcType="VARCHAR" property="gonggaoOne5" />
+		<result column="gonggao_one6" jdbcType="VARCHAR" property="gonggaoOne6" />
+		<result column="gonggao_one7" jdbcType="VARCHAR" property="gonggaoOne7" />
+		<result column="gonggao_one8" jdbcType="VARCHAR" property="gonggaoOne8" />
+	</resultMap>
+
+	<select id="queryTitle" resultType="TGonggao" parameterType="TGonggao"
+		resultMap="BaseResultMap">
+		select gonggao_id, gonggao_title from t_gonggao order by
+		gonggao_data desc limit 0, 5
+	</select>
+
+	<select id="queryGonggaoById" resultMap="BaseResultMap" parameterType="int">
+		select * from t_gonggao where gonggao_id = #{id}
+	</select>
+	
+	<select id="queryAll"  resultType="TGonggao" parameterType="TGonggao" resultMap="BaseResultMap">
+		select * from t_gonggao
+	</select>
+	
+	<delete id="deleteGonggaoById" parameterType="int">
+		delete from t_gonggao where gonggao_id = #{id}
+	</delete>
+	
+	<insert id="save" parameterType="TGonggao">
+		insert into t_gonggao(gonggao_title, gonggao_content, gonggao_fabuzhe, gonggao_data) values(#{gonggaoTitle}, #{gonggaoContent}, #{gonggaoFabuzhe}, now())
+	</insert>
+	
+</mapper>

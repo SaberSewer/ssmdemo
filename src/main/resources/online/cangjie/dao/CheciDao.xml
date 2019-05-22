@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.cangjie.dao.CheciDao">
+	<select id="queryAll" resultType="TCheci" parameterType="TCheci">
+		select * from t_checi
+		<where>
+			<if test="shifazhan != '' and shifazhan != null">
+				shifazhan =
+				#{shifazhan}
+			</if>
+			<if test="piaoshijian != null and piaoshijian != ''">
+				and piaoshijian = #{piaoshijian}
+			</if>
+			<if test="startshijian != null and startshijian != ''">
+				and startshijian = #{startshijian}
+			</if>
+			<if test="endshijian != null and endshijian != ''">
+				and endshijian = #{endshijian}
+			</if>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteCheciById" parameterType="int">
+		delete from t_checi
+		where id = #{id}
+	</delete>
+
+	<insert id="insertCheci" parameterType="TCheci">
+		insert into t_checi (shifazhan, daodazhan,
+		piaoshijian, startshijian, endshijian,
+		piaojia, piaoshu
+		)
+		values (#{shifazhan}, #{daodazhan},
+		#{piaoshijian}, #{startshijian}, #{endshijian},
+		#{piaojia}, #{piaoshu}
+		)
+	</insert>
+	
+	<update id="updateCheci" parameterType="TCheci">
+		update t_checi set shifazhan = #{shifazhan}, daodazhan = #{daodazhan},
+		piaoshijian = #{piaoshijian}, startshijian = #{startshijian}, endshijian = #{piaojia},
+		piaojia = #{piaojia}, piaoshu = #{piaoshu} where id = #{id}
+	</update>
+	
+	<update id="updateTick" parameterType="TCheci">
+		update t_checi set piaoshu = piaoshu - #{piaoshu} where id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.cangjie.dao.UserDao">
+	<resultMap id="BaseResultMap" type="TUser">
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="user_name" jdbcType="VARCHAR" property="userName" />
+		<result column="user_pw" jdbcType="VARCHAR" property="userPw" />
+		<result column="user_type" jdbcType="INTEGER" property="userType" />
+		<result column="user_realname" jdbcType="VARCHAR" property="userRealname" />
+		<result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+		<result column="user_sex" jdbcType="VARCHAR" property="userSex" />
+		<result column="user_tel" jdbcType="VARCHAR" property="userTel" />
+		<result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+		<result column="user_qq" jdbcType="VARCHAR" property="userQq" />
+		<result column="user_man" jdbcType="VARCHAR" property="userMan" />
+		<result column="user_age" jdbcType="VARCHAR" property="userAge" />
+		<result column="user_birthday" jdbcType="VARCHAR" property="userBirthday" />
+		<result column="user_xueli" jdbcType="VARCHAR" property="userXueli" />
+		<result column="user_one1" jdbcType="VARCHAR" property="userOne1" />
+		<result column="user_one2" jdbcType="VARCHAR" property="userOne2" />
+		<result column="user_one3" jdbcType="VARCHAR" property="userOne3" />
+		<result column="user_one4" jdbcType="VARCHAR" property="userOne4" />
+		<result column="user_one5" jdbcType="VARCHAR" property="userOne5" />
+		<result column="user_one6" jdbcType="INTEGER" property="userOne6" />
+		<result column="user_one7" jdbcType="INTEGER" property="userOne7" />
+		<result column="user_one8" jdbcType="INTEGER" property="userOne8" />
+		<result column="user_one9" jdbcType="DATE" property="userOne9" />
+		<result column="user_one10" jdbcType="DATE" property="userOne10" />
+		<result column="user_one11" jdbcType="VARCHAR" property="userOne11" />
+		<result column="user_one12" jdbcType="VARCHAR" property="userOne12" />
+	</resultMap>
+
+	<select id="queryUserByIdAndPassword" resultType="TUser"
+		parameterType="TUser" resultMap="BaseResultMap">
+		select *
+		from t_user where user_name =
+		#{userName} and user_pw = #{userPw}
+	</select>
+
+	<insert id="save" parameterType="TUser">
+		insert into t_user (user_name,
+		user_pw,
+		user_type, user_realname, user_address,
+		user_sex,
+		user_tel,
+		user_email,
+		user_qq, user_man, user_age,
+		user_birthday,
+		user_xueli)
+		values (#{userName}, #{userPw},
+		1,
+		#{userRealname},
+		#{userAddress},
+		#{userSex}, #{userTel}, #{userEmail},
+		#{userQq},
+		#{userMan}, #{userAge},
+		#{userBirthday}, #{userXueli})
+	</insert>
+
+	<select id="queryAll" resultType="TUser" resultMap="BaseResultMap">
+		select * from
+		t_user
+	</select>
+
+	<delete id="deleteUserById" parameterType="int">
+		delete from t_user
+		where user_id = #{id}
+	</delete>
+
+	<select id="queryUserById" parameterType="int" resultType="TUser"
+		resultMap="BaseResultMap">
+		select * from t_user where user_id = #{id}
+	</select>
+
+	<update id="updatePassword" parameterType="TUser">
+		update t_user set
+		user_pw = #{userPw} where user_id = #{userId}
+	</update>
+
+	<update id="updateUser" parameterType="TUser">
+		update t_user set
+		user_realname = #{userRealname}, user_address= #{userAddress},
+		user_sex = #{userSex}, user_tel = #{userTel}, user_email =
+		#{userEmail}, user_qq = #{userQq} where user_id = #{userId}
+	</update>
+</mapper>

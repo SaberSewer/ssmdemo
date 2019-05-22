@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.cangjie.dao.YudingDao">
+  <resultMap id="BaseResultMap" type="TYuding">
+    <result column="yuding_id" jdbcType="INTEGER" property="yudingId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="checi_id" jdbcType="INTEGER" property="checiId" />
+    <result column="yuding_shumu" jdbcType="INTEGER" property="yudingShumu" />
+    <result column="yuding_jine" jdbcType="VARCHAR" property="yudingJine" />
+    <result column="zhifufangshi" jdbcType="VARCHAR" property="zhifufangshi" />
+    <result column="yuding_shijian" jdbcType="VARCHAR" property="yudingShijian" />
+    <result column="yuding_zhuantai" jdbcType="VARCHAR" property="yudingZhuantai" />
+  </resultMap>
+	<select id="queryAll" parameterType="TYuding" resultType="TYuding" resultMap="BaseResultMap">
+		select * from t_yuding <where>
+			<if test="yudingId != null">
+				yuding_id = #{yudingId}
+			</if>
+			<if test="userId != null">
+				and user_id = #{userId}
+			</if>
+			<if test="checiId != null">
+				and checi_id = #{checiId}
+			</if>
+		</where>
+	</select>
+	<delete id="deleteYudingById" parameterType="int">
+		delete from t_yuding where yuding_id =#{yudingId}
+	</delete>
+	<insert id="insertYuding" parameterType="TYuding">
+		insert into t_yuding(user_id, checi_id, yuding_shumu, yuding_jine, zhifufangshi, yuding_shijian, yuding_zhuantai) 
+		values(#{userId}, #{checiId}, #{yudingShumu}, #{yudingJine}, #{zhifufangshi}, now(), 0);
+	</insert>
+	
+	<update id="updateState" parameterType="int">
+		update t_yuding set yuding_zhuantai = 1 where yuding_id = #{id}
+	</update>
+</mapper>

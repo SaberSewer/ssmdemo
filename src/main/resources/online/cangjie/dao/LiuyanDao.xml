@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.cangjie.dao.LiuyanDao">
+	<resultMap id="BaseResultMap" type="TLiuyan">
+		<result column="liuyan_id" jdbcType="INTEGER" property="liuyanId" />
+		<result column="liuyan_title" jdbcType="VARCHAR" property="liuyanTitle" />
+		<result column="liuyan_content" jdbcType="VARCHAR" property="liuyanContent" />
+		<result column="liuyan_date" jdbcType="VARCHAR" property="liuyanDate" />
+		<result column="liuyan_user" jdbcType="VARCHAR" property="liuyanUser" />
+	</resultMap>
+	<select id="queryAll" resultMap="BaseResultMap" resultType="TLiuyan">
+		select * from t_liuyan
+	</select>
+	
+	<delete id="deleteLiuyanById" parameterType="int">
+		delete from t_liuyan where liuyan_id = #{liuyan_id}
+	</delete>
+	
+	<insert id="save" parameterType="TLiuyan">
+		insert into t_liuyan(liuyan_title, liuyan_content, liuyan_date, liuyan_user) values(#{liuyanTitle}, #{liuyanContent}, now(),
+		<if test="liuyanUser == null">
+		'游客'
+		</if>
+		<if test="liuyanUser != null" >
+			#{liuyanUser}
+		</if>
+		)
+		
+	</insert>
+</mapper>

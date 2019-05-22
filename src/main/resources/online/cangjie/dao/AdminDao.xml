@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.cangjie.dao.AdminDao">
+	<resultMap id="BaseResultMap" type="TAdmin">
+		<result column="userId" jdbcType="INTEGER" property="userid" />
+		<result column="userName" jdbcType="VARCHAR" property="username" />
+		<result column="userPw" jdbcType="VARCHAR" property="userpw" />
+	</resultMap>
+	<select id="queryAdminByUsernameAndPassword" resultMap="BaseResultMap"
+		resultType="TAdmin" parameterType="TAdmin">
+		select * from t_admin where userName
+		= #{username} and userPw =#{userpw}
+	</select>
+
+	<update id="updateAdminPassword" parameterType="TAdmin">
+		update t_admin
+		set userPw =#{userpw} where userId = #{userid}
+	</update>
+
+	<select id="queryAll" resultMap="BaseResultMap" resultType="TAdmin">
+		select * from t_admin
+	</select>
+	
+	<delete id="deleteAdminById" parameterType="int">
+		delete from t_admin where userId = #{id}
+	</delete>
+	
+	<insert id="insertAdmin" parameterType="TAdmin">
+		insert into t_admin(userName, userPw) values(#{username}, #{userpw})
+	</insert>
+</mapper>
