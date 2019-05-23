@@ -1,8 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
-%>
+long vmFree = 0;
+long vmUse = 0;
+long vmTotal = 0;
+long vmMax = 0;
+int byteToMb = 1024 * 1024;
+Runtime rt = Runtime.getRuntime();
+vmTotal = rt.totalMemory() / byteToMb;
+vmFree = rt.freeMemory() / byteToMb;
 
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -44,7 +52,7 @@ String path = request.getContextPath();
 		    <td width="25%" bgcolor="#FFFFFF" align="right">总内存/剩余内存：</td>
 		    <td>
                
-				<b></b>MB&nbsp;&nbsp;/&nbsp;&nbsp;<b></b>MB
+				<b></b><%=vmTotal %>MB&nbsp;&nbsp;/&nbsp;&nbsp;<%=vmFree %><b></b>MB
             </td>
 		  </tr>
 		</table>

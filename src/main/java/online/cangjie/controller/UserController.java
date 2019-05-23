@@ -1,6 +1,5 @@
 package online.cangjie.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +54,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "logout")
-	public String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "qiantai/default";
 	}

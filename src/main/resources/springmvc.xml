@@ -23,8 +23,7 @@
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-		<mvc:mapping path="/admin/**"/>
-		<mvc:exclude-mapping path="/**"/>
+		<mvc:mapping path="/yuding/**"/>
 			<bean class="online.cangjie.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

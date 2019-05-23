@@ -1,8 +1,8 @@
 package online.cangjie.interceptor;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -12,10 +12,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
-		Cookie cookies[] = request.getCookies();
-		for (Cookie cookie : cookies) {
-			System.out.println(cookie.getName());
-			System.out.println(cookie.getValue());
+		System.out.println("++++++++++++++++++++++++++++++++++++");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null){
+			response.setCharacterEncoding("UTF-8");
+			response.setHeader("refresh","3;url='/index.do'");
+			response.getWriter().println("<html>"
+					+ "请先登录"
+					+ "</html>");
 		}
 		return true;
 	}

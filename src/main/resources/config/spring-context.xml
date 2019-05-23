@@ -9,5 +9,4 @@
 	
 	<context:annotation-config />
 	<context:component-scan base-package="online.cangjie"></context:component-scan>
-
 </beans>

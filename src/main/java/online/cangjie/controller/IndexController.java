@@ -25,6 +25,7 @@ public class IndexController {
 
 	@RequestMapping(value = "search.do")
 	public String search(TCheci checi, Model model) {
+		System.out.println(checi);
 		model.addAttribute("checi", initService.getCheci(checi));
 		return "/qiantai/index";
 	}

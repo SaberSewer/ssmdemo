@@ -12,7 +12,7 @@ import online.cangjie.po.TUser;
 import online.cangjie.po.TYuding;
 import online.cangjie.service.UserService;
 
-@Service
+@Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService{
 	@Autowired

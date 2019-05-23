@@ -67,10 +67,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				                 航班日期：<input class="inputText" size="10" name="piaoshijian" readonly="readonly" class="Wdate"  type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd'})"/>
 				           </td>
 				           <td>
-				                 起飞时间断：<input class="inputText" size="10" name="startshijian1" readonly="readonly" class="Wdate"  type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'HH:mm'})"/>
+				                 起飞时间断：<input class="inputText" size="10" name="startshijian" readonly="readonly" class="Wdate"  type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'HH:mm'})"/>
 				           </td>
 				           <td>
-				               --<input class="inputText" size="10" name="startshijian2" readonly="readonly" class="Wdate"  type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'HH:mm'})"/>
+				               --<input class="inputText" size="10" name="endshijian" readonly="readonly" class="Wdate"  type="text" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'HH:mm'})"/>
 				           </td>
 				           <td>
 				               <input type="submit" value="search">
