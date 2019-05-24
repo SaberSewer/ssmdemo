@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.lang.management.ManagementFactory"%>
+<%@ page language="java" import="com.sun.management.OperatingSystemMXBean" %>
 <%
 String path = request.getContextPath();
 long vmFree = 0;
@@ -9,6 +11,12 @@ int byteToMb = 1024 * 1024;
 Runtime rt = Runtime.getRuntime();
 vmTotal = rt.totalMemory() / byteToMb;
 vmFree = rt.freeMemory() / byteToMb;
+vmMax = rt.maxMemory() / byteToMb;
+vmUse = vmTotal - vmFree;
+OperatingSystemMXBean osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+long physicalFree = osmxb.getFreePhysicalMemorySize() / byteToMb;
+long physicalTotal = osmxb.getTotalPhysicalMemorySize() / byteToMb;
+long physicalUse = physicalTotal - physicalFree;
 
 %>
 
@@ -50,10 +58,16 @@ vmFree = rt.freeMemory() / byteToMb;
 		    <td><%=System.getProperty("java.home") %></td>
 		  </tr>
 		  <tr bgcolor="#FFFFFF">
-		    <td width="25%" bgcolor="#FFFFFF" align="right">总内存/剩余内存：</td>
+		    <td width="25%" bgcolor="#FFFFFF" align="right">JVM总内存/剩余内存：</td>
 		    <td>
           
-				<b></b><%=vmFree %>MB&nbsp;&nbsp;/&nbsp;&nbsp;<%=vmTotal %><b></b>MB
+				<b></b><%=vmMax %>MB&nbsp;&nbsp;/&nbsp;&nbsp;<%=vmFree %><b></b>MB
+            </td>
+		  </tr>
+		  <tr bgcolor="#FFFFFF">
+		    <td width="25%" bgcolor="#FFFFFF" align="right">总内存/剩余内存：</td>
+		    <td>    
+				<b></b><%=physicalTotal %>MB&nbsp;&nbsp;/&nbsp;&nbsp;<%=physicalFree %><b></b>MB
             </td>
 		  </tr>
 		</table>

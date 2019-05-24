@@ -44,13 +44,17 @@
 			$.ajax({
 				url:"/liuyan/text.do",
 				data: json,
-				dataType: "json;charset=utf-8",
+				dataType: "json",
 				type: "post",
 				success: function (date){
-					if(date.tag == "success"){
-						alert("留言成功");
-						location.href = "/liuyan.do"
+					if(date.tag == 'success'){
+						alert('留言成功')
+						location.href = "/liuyan.do"	
 					}
+					
+				},
+				error: function (){
+					alert("服务器遇见怪兽了")
 				}
 			})
         })

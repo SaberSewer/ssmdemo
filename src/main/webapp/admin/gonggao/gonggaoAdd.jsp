@@ -43,13 +43,16 @@ String path = request.getContextPath();
 			$.ajax({
 				url:"/admin/addGonggao.do",
 				data: json,
-				dataType: "json;charset=utf-8",
+				dataType: "json",
 				type: "post",
 				success: function (date){
 					if(date.tag == "success"){
-						alert("留言成功");
-						location.href = "/liuyan.do"
+						alert("公告发布成功");
+						location.href = "initGonggao.do"
 					}
+				},
+				error: function (){
+					alert("服务器被怪兽破坏了")
 				}
 			})
         })

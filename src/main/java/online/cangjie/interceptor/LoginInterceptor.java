@@ -12,14 +12,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("++++++++++++++++++++++++++++++++++++");
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user") == null){
 			response.setCharacterEncoding("UTF-8");
 			response.setHeader("refresh","3;url='/index.do'");
-			response.getWriter().println("<html>"
-					+ "请先登录"
-					+ "</html>");
+			response.sendRedirect("/message.jsp");
 		}
 		return true;
 	}
