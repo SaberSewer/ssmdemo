@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+						http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+						
+	<bean name="checi" class="online.cangjie.utils.CheciUtil"></bean>
+	<bean id="checishengcheng" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		 <property name="targetObject">  
+            <ref bean="checi" />  
+        </property>  
+        <!-- 类中的方法 -->  
+        <property name="targetMethod">  
+            <value>updateCheciInfo</value>  
+        </property>  
+	</bean>
+	<bean id="run1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">  
+            <ref bean="checishengcheng" />  
+        </property>  
+        <property name="cronExpression">
+        	<!-- 秒 分 时 天 月  -->
+           <value>0 0 0 * * ?</value>  
+        </property>  
+	</bean>
+	
+	<bean name="yuding" class="online.cangjie.utils.YudingUtil"></bean>
+	<bean id="yudingshouli" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		 <property name="targetObject">  
+            <ref bean="yuding" />  
+        </property>  
+        <!-- 类中的方法 -->  
+        <property name="targetMethod">  
+            <value>autoSell</value>  
+        </property>  
+	</bean>
+	<bean id="run2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">  
+            <ref bean="yudingshouli" />  
+        </property>  
+        <property name="cronExpression">  
+            <value>5/5 * * * * ?</value>  
+        </property>  
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">  
+            <list>  
+                <ref bean="run1" />  
+                <ref bean="run2" />  
+            </list>  
+        </property>
+	</bean>
+</beans>

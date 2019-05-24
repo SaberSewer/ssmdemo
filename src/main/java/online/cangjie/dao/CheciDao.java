@@ -16,4 +16,6 @@ public interface CheciDao {
 	public Integer updateCheci(TCheci checi);
 	
 	public Integer updateTick(TCheci checi);
+	
+	public Integer updateCheciTimeAndTickNum(String date);
 }

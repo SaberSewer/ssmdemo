@@ -14,4 +14,8 @@ public interface YudingDao {
 	public Integer insertYuding(TYuding yuding);
 	
 	public void updateState(Integer id);
+	
+	public Integer autoUpdateState();
+	
+	public List<String> queryState();
 }

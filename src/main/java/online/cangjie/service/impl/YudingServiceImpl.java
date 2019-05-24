@@ -37,7 +37,7 @@ public class YudingServiceImpl implements YudingService {
 		// TODO Auto-generated method stub
 		String mail = user.getUserEmail();
 		EmailUtil emailUtil = EmailUtil.getEmailUtil();
-		emailUtil.sendEmail("订单信息，请勿回复", "您的订单已提交，等待受理", "");
+		emailUtil.sendEmail("订单信息，请勿回复", "您的订单已提交，等待受理", mail);
 		TCheci checi = new TCheci();
 		checi.setId(yuding.getCheciId());
 		checi.setPiaoshu(yuding.getYudingShumu());

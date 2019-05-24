@@ -48,4 +48,8 @@
 	<update id="updateTick" parameterType="TCheci">
 		update t_checi set piaoshu = piaoshu - #{piaoshu} where id = #{id}
 	</update>
+	
+	<update id="updateCheciTimeAndTickNum" parameterType="string">
+		update t_checi set piaoshu = 99, piaoshijian = #{date};
+	</update>
 </mapper>

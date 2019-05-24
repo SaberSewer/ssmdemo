@@ -35,4 +35,13 @@
 	<update id="updateState" parameterType="int">
 		update t_yuding set yuding_zhuantai = 1 where yuding_id = #{id}
 	</update>
+	
+	<update id="autoUpdateState">
+		update t_yuding set yuding_zhuantai = 1 where yuding_id in (select yuding_id as yid from (select yuding_id from t_yuding) as temp where yuding_zhuantai = 0)
+	</update>
+	
+	<select id="queryState" resultType="string">
+		select user_email from t_user where user_id in (select user_id from t_yuding where yuding_zhuantai = 0)
+	</select>
+	
 </mapper>
